@@ -22,6 +22,7 @@ import com.google.common.io.Files;
 
 import be.quodlibet.boxable.datatable.DataTable;
 import be.quodlibet.boxable.utils.ImageUtils;
+import org.junit.Ignore;
 
 public class TableTest {
 
@@ -494,6 +495,7 @@ public class TableTest {
 	}
 
 	@Test
+        @Ignore
 	public void SampleTest5() throws IOException {
 
 		// Set margins
@@ -597,6 +599,7 @@ public class TableTest {
 	}
 
 	@Test
+        @Ignore
 	public void SampleTest7() throws IOException {
 
 		// Set margins
@@ -769,6 +772,7 @@ public class TableTest {
 	}
 
 	@Test
+        @Ignore
 	public void lineSpacingTest() throws IOException {
 
 		// Set margins
