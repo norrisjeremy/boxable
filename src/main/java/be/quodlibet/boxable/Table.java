@@ -29,6 +29,7 @@ import be.quodlibet.boxable.text.Token;
 import be.quodlibet.boxable.text.WrappingFunction;
 import be.quodlibet.boxable.utils.FontUtils;
 import be.quodlibet.boxable.utils.PDStreamUtils;
+import java.io.UncheckedIOException;
 
 public abstract class Table<T extends PDPage> {
 
@@ -46,7 +47,7 @@ public abstract class Table<T extends PDPage> {
 	private final float width;
 	private final boolean drawLines;
 	private final boolean drawContent;
-	private float headerBottomMargin = 4f;
+	private final float headerBottomMargin = 4f;
 	private float lineSpacing = 1f;
 
 	private boolean tableIsBroken = false;
@@ -166,16 +167,15 @@ public abstract class Table<T extends PDPage> {
 			// if you don't have title just use the height of maxTextBox in your "row"
 			yStart -= height;
 		} else {
-			PDPageContentStream articleTitle = createPdPageContentStream();
-			Paragraph paragraph = new Paragraph(title, font, fontSize, tableWidth, HorizontalAlignment.get(alignment),
-					wrappingFunction);
-			paragraph.setDrawDebug(drawDebug);
-			yStart = paragraph.write(articleTitle, margin, yStart);
-			if (paragraph.getHeight() < height) {
-				yStart -= (height - paragraph.getHeight());
-			}
-
-			articleTitle.close();
+                    try (PDPageContentStream articleTitle = createPdPageContentStream()) {
+                        Paragraph paragraph = new Paragraph(title, font, fontSize, tableWidth, HorizontalAlignment.get(alignment),
+                                wrappingFunction);
+                        paragraph.setDrawDebug(drawDebug);
+                        yStart = paragraph.write(articleTitle, margin, yStart);
+                        if (paragraph.getHeight() < height) {
+                            yStart -= (height - paragraph.getHeight());
+                        }
+                    }
 
 			if (drawDebug) {
 				// margin
@@ -193,14 +193,14 @@ public abstract class Table<T extends PDPage> {
 	}
 
 	public Row<T> createRow(float height) {
-		Row<T> row = new Row<T>(this, height);
+		Row<T> row = new Row<>(this, height);
 		row.setLineSpacing(lineSpacing);
 		this.rows.add(row);
 		return row;
 	}
 
 	public Row<T> createRow(List<Cell<T>> cells, float height) {
-		Row<T> row = new Row<T>(this, cells, height);
+		Row<T> row = new Row<>(this, cells, height);
 		row.setLineSpacing(lineSpacing);
 		this.rows.add(row);
 		return row;
@@ -624,8 +624,8 @@ public abstract class Table<T extends PDPage> {
 									this.tableContentStream.closePath();
 									cursorX += currentFont.getStringWidth(token.getData()) / 1000 * cell.getFontSize();
 								} catch (IOException e) {
-									e.printStackTrace();
-								}
+                                                                    throw new UncheckedIOException(e);
+                                                                }
 							}
 							break;
 						}
