@@ -41,6 +41,7 @@ public abstract class Table<T extends PDPage> {
 	private List<PDOutlineItem> bookmarks;
 	private List<Row<T>> header = new ArrayList<>();
 	private List<Row<T>> rows = new ArrayList<>();
+        private List<PDPage> pages = new ArrayList<>();
 
 	private final float yStartNewPage;
 	private float yStart;
@@ -191,7 +192,8 @@ public abstract class Table<T extends PDPage> {
 	public float getWidth() {
 		return width;
 	}
-
+        
+        @Deprecated
 	public Row<T> createRow(float height) {
 		Row<T> row = new Row<>(this, height);
 		row.setLineSpacing(lineSpacing);
@@ -199,13 +201,28 @@ public abstract class Table<T extends PDPage> {
 		return row;
 	}
 
+        @Deprecated
 	public Row<T> createRow(List<Cell<T>> cells, float height) {
 		Row<T> row = new Row<>(this, cells, height);
 		row.setLineSpacing(lineSpacing);
 		this.rows.add(row);
 		return row;
 	}
-
+        
+        public Row<T> createRow(float height, PDPage page) {
+		Row<T> row = new Row<>(this, height, page);
+		row.setLineSpacing(lineSpacing);
+		this.rows.add(row);
+		return row;
+	}
+        
+        public Row<T> createRow(List<Cell<T>> cells, float height, PDPage page) {
+		Row<T> row = new Row<>(this, cells, height, page);
+		row.setLineSpacing(lineSpacing);
+		this.rows.add(row);
+		return row;
+	}
+        
 	public float draw() throws IOException {
 		ensureStreamIsOpen();
 
