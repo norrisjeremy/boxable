@@ -41,7 +41,7 @@ public abstract class Table<T extends PDPage> {
 	private List<PDOutlineItem> bookmarks;
 	private List<Row<T>> header = new ArrayList<>();
 	private List<Row<T>> rows = new ArrayList<>();
-        private List<PDPage> pages = new ArrayList<>();
+        private List<T> pages = new ArrayList<>();
 
 	private final float yStartNewPage;
 	private float yStart;
@@ -134,7 +134,9 @@ public abstract class Table<T extends PDPage> {
 
 		// Fonts needs to be loaded before page creation
 		loadFonts();
-		this.currentPage = pageProvider.nextPage();
+                T nextPage = pageProvider.nextPage();
+                pages.add(nextPage);
+		this.currentPage = nextPage;
 	}
 
 	protected abstract void loadFonts() throws IOException;
@@ -322,7 +324,9 @@ public abstract class Table<T extends PDPage> {
 	 */
 	private T createNewPage() {
 		if (pageProvider != null) {
-			return pageProvider.nextPage();
+                        T nextPage = pageProvider.nextPage();
+                        pages.add(nextPage);
+			return nextPage;
 		}
 
 		return createPage();
@@ -933,5 +937,9 @@ public abstract class Table<T extends PDPage> {
 	public void setLineSpacing(float lineSpacing) {
 		this.lineSpacing = lineSpacing;
 	}
+        
+        public List<T> getPages(){
+            return pages;
+        }
 
 }
