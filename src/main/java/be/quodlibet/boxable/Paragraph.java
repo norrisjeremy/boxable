@@ -528,7 +528,6 @@ public class Paragraph {
 		}
 
 		for (String line : getLines()) {
-			line = line.trim();
 
 			float textX = cursorX;
 			switch (align) {
@@ -643,7 +642,7 @@ public class Paragraph {
 
 	private float getHorizontalFreeSpace(final String text) {
 		try {
-			final float tw = font.getStringWidth(text.trim()) / 1000 * fontSize;
+			final float tw = font.getStringWidth(text) / 1000 * fontSize;
 			return width - tw;
 		} catch (IOException e) {
 			throw new IllegalStateException("Unable to calculate text width", e);
