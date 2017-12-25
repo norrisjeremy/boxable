@@ -50,21 +50,21 @@ public class DataTable {
 	public DataTable(Table table, PDPage page) throws IOException {
 		this.table = table;
 		// Create a dummy pdf document, page and table to create template cells
-		PDDocument ddoc = new PDDocument();
-		PDPage dpage = new PDPage();
-		dpage.setMediaBox(page.getMediaBox());
-		dpage.setRotation(page.getRotation());
-		ddoc.addPage(dpage);
-		BaseTable dummyTable = new BaseTable(10f, 10f, 10f, table.getWidth(), 10f, ddoc, dpage, false, false);
-		Row dr = dummyTable.createRow(0f);
-		headerCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
-		dataCellTemplateEven = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-		dataCellTemplateOdd = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-		firstColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-		lastColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-		defaultCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-		setDefaultStyles();
-		ddoc.close();
+            try (PDDocument ddoc = new PDDocument()) {
+                PDPage dpage = new PDPage();
+                dpage.setMediaBox(page.getMediaBox());
+                dpage.setRotation(page.getRotation());
+                ddoc.addPage(dpage);
+                BaseTable dummyTable = new BaseTable(10f, 10f, 10f, table.getWidth(), 10f, ddoc, dpage, false, false);
+                Row dr = dummyTable.createRow(0f);
+                headerCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
+                dataCellTemplateEven = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
+                dataCellTemplateOdd = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
+                firstColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
+                lastColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
+                defaultCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
+                setDefaultStyles();
+            }
 	}
 
 	/**
@@ -260,7 +260,8 @@ public class DataTable {
 			}
 			if (isHeader) {
 				// Add Header Row
-				Row h = table.createRow(headerCellTemplate.getCellHeight());
+                                // Row h = table.createRow(headerCellTemplate.getCellHeight());
+				Row h = table.createRow(headerCellTemplate.getCellHeight(), getTable().getCurrentPage());
 				for (int i = 0; i <= numcols; i++) {
 					String cellValue = line.get(i);
 					Cell c = h.createCell(colWidths.get(i), cellValue, headerCellTemplate.getAlign(),
@@ -272,7 +273,8 @@ public class DataTable {
 				table.addHeaderRow(h);
 				isHeader = false;
 			} else {
-				Row r = table.createRow(dataCellTemplateEven.getCellHeight());
+                                //Row r = table.createRow(dataCellTemplateEven.getCellHeight());
+				Row r = table.createRow(dataCellTemplateEven.getCellHeight(), getTable().getCurrentPage());
 				for (int i = 0; i <= numcols; i++) {
 					// Choose the correct template for the cell
 					Cell template = dataCellTemplateEven;
