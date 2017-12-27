@@ -755,7 +755,7 @@ public class TableTest {
 
 		BaseTable dataTable = new BaseTable(700, startNewPageY, bottomMargin, tableWidth, leftMargin, document,
 				currentPage, true, true);
-		DataTable t = new DataTable(dataTable, currentPage, PDType1Font.HELVETICA, PDType1Font.HELVETICA_BOLD);
+		DataTable t = new DataTable(dataTable, currentPage);
 		t.addListToTable(table, DataTable.HASHEADER);
 		dataTable.draw();
 
