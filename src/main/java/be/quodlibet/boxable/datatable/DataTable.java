@@ -19,6 +19,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 /**
  * Write CSV documents directly to PDF Tables
@@ -50,6 +51,10 @@ public class DataTable {
      * @param page {@link PDPage}
      * @throws IOException If there is an error releasing resources
      */
+    public DataTable(Table table, PDPage page) throws IOException {
+        this(table, page, null, null);
+    }
+
     public DataTable(Table table, PDPage page, PDFont bodyFont, PDFont headerFont) throws IOException {
         this.table = table;
         this.bodyFont = bodyFont;
@@ -83,13 +88,13 @@ public class DataTable {
         // Header style
         headerCellTemplate.setFillColor(new Color(137, 218, 245));
         headerCellTemplate.setTextColor(Color.BLACK);
-        headerCellTemplate.setFont(headerFont);
+        headerCellTemplate.setFont((headerFont == null) ? PDType1Font.HELVETICA_BOLD : headerFont);
         headerCellTemplate.setBorderStyle(thinline);
 
         // Normal cell style, all rows and columns are the same by default
         defaultCellTemplate.setFillColor(new Color(242, 242, 242));
         defaultCellTemplate.setTextColor(Color.BLACK);
-        defaultCellTemplate.setFont(bodyFont);
+        defaultCellTemplate.setFont((bodyFont == null) ? PDType1Font.HELVETICA : bodyFont);
         defaultCellTemplate.setBorderStyle(thinline);
 
         dataCellTemplateEven.copyCellStyle(defaultCellTemplate);
