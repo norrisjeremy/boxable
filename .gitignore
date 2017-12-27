@@ -20,3 +20,7 @@ target
 .gradle
 .metadata
 settings.xml
+src/main/java/be/quodlibet/main/Main.java
+src/main/resources/font/cour.ttf
+src/main/resources/font/Verdana.ttf
+src/main/resources/font/verdanab.ttf
