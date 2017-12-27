@@ -14,6 +14,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -81,7 +82,7 @@ public class DataTableTest
 
         BaseTable dataTable = new BaseTable(yStart, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true,
                                             true);
-        DataTable t = new DataTable(dataTable, page);
+        DataTable t = new DataTable(dataTable, page, PDType1Font.HELVETICA, PDType1Font.HELVETICA_BOLD);
         t.addListToTable(data, DataTable.HASHEADER);
         dataTable.draw();
         File file = new File("target/ListExampleLandscape.pdf");
@@ -110,7 +111,7 @@ public class DataTableTest
 
         BaseTable dataTable = new BaseTable(yStart, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true,
                                             true);
-        DataTable t = new DataTable(dataTable, page);
+        DataTable t = new DataTable(dataTable, page, PDType1Font.HELVETICA, PDType1Font.HELVETICA_BOLD);
         t.addCsvToTable(data, DataTable.HASHEADER, ';');
         dataTable.draw();
         File file = new File("target/CSVexampleColWidths.pdf");
@@ -137,7 +138,7 @@ public class DataTableTest
 
         BaseTable dataTable = new BaseTable(yStart, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true,
                                             true);
-        DataTable t = new DataTable(dataTable, page);
+        DataTable t = new DataTable(dataTable, page, PDType1Font.HELVETICA, PDType1Font.HELVETICA_BOLD);
         t.addCsvToTable(data, DataTable.HASHEADER, ';');
         dataTable.draw();
         File file = new File("target/CSVexamplePortrait.pdf");
@@ -166,7 +167,7 @@ public class DataTableTest
 
         BaseTable dataTable = new BaseTable(yStart, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true,
                                             true);
-        DataTable t = new DataTable(dataTable, page);
+        DataTable t = new DataTable(dataTable, page, PDType1Font.HELVETICA, PDType1Font.HELVETICA_BOLD);
         t.addCsvToTable(data, DataTable.HASHEADER, ';');
         dataTable.draw();
         File file = new File("target/CSVexampleLandscape.pdf");
@@ -205,7 +206,7 @@ public class DataTableTest
         Cell c2 = h2.createCell(100, "Eur per kWh for Medium Size Households.<br/>Source <i>http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&plugin=1&language=en&pcode=ten00117</i>");
         c2.setFillColor(new Color(175, 212, 224));
         dataTable.addHeaderRow(h2);
-        DataTable t = new DataTable(dataTable, page);
+        DataTable t = new DataTable(dataTable, page, PDType1Font.HELVETICA, PDType1Font.HELVETICA_BOLD);
         t.addCsvToTable(data, DataTable.HASHEADER, ';');
         dataTable.draw();
         File file = new File("target/CSVexampleSimple.pdf");
@@ -245,7 +246,7 @@ public class DataTableTest
         Cell c2 = h2.createCell(100, "Eur per kWh for Medium Size Households.<br/>Source <i>http://ec.europa.eu/eurostat/tgm/table.do?tab=table&init=1&plugin=1&language=en&pcode=ten00117</i>");
         c2.setFillColor(new Color(175, 212, 224));
         dataTable.addHeaderRow(h2);
-        DataTable t = new DataTable(dataTable, page);
+        DataTable t = new DataTable(dataTable, page, PDType1Font.HELVETICA, PDType1Font.HELVETICA_BOLD);
         //set the style template for header cells
         t.getHeaderCellTemplate().setFillColor(new Color(13, 164, 214));
         //set the style template for first column
