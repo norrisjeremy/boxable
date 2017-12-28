@@ -190,16 +190,48 @@ public class DataTable {
      * @param hasHeader boolean if {@link Table} has header
      * @throws IOException parsing error
      */
-    public void addListToTable(List<List<String>> data, Boolean hasHeader) throws IOException {
+    public void addListToTable(List<List> data, Boolean hasHeader) throws IOException {
         char separator = ';';
         if (data == null || data.isEmpty()) {
             return;
         }
         String output = "";
         // Convert Map of arbitrary objects to a csv String
+        for (List inputList : data) {
+            for (Object v : inputList) {
+                String value = v.toString();
+                if (value.contains("" + separator)) {
+                    // surround value with quotes if it contains the escape
+                    // character
+                    value = "\"" + value + "\"";
+                }
+                output += value + separator;
+            }
+            // remove the last separator
+            output = removeLastChar(output);
+            output += "\n";
+        }
+        addCsvToTable(output, hasHeader, separator);
+    }
+
+    /**
+     * <p>
+     * Add a List of String Lists to the Table
+     * </p>
+     *
+     * @param data {@link Table}'s data
+     * @param hasHeader boolean if {@link Table} has header
+     * @throws IOException parsing error
+     */
+    public void addStringListToTable(List<List<String>> data, Boolean hasHeader) throws IOException {
+        char separator = ';';
+        if (data == null || data.isEmpty()) {
+            return;
+        }
+        String output = "";
+        // Convert List of String List to a csv String
         for (List<String> inputList : data) {
             for (String value : inputList) {
-//				String value = v.toString(); //TODO: remove
                 if (value.contains("" + separator)) {
                     // surround value with quotes if it contains the escape
                     // character
