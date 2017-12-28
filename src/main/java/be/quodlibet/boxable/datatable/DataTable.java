@@ -303,7 +303,7 @@ public class DataTable {
             if (isHeader) {
                 // Add Header Row
                 // Row h = table.createRow(headerCellTemplate.getCellHeight());
-                Row h = table.createRow(headerCellTemplate.getCellHeight(), getTable().getCurrentPage());
+                Row h = table.createRow(headerCellTemplate.getCellHeight(), table.getCurrentPage());
                 for (int i = 0; i <= numcols; i++) {
                     String cellValue = line.get(i);
                     Cell c = h.createCell(colWidths.get(i), cellValue, headerCellTemplate.getAlign(),
@@ -316,7 +316,7 @@ public class DataTable {
                 isHeader = false;
             } else {
                 //Row r = table.createRow(dataCellTemplateEven.getCellHeight());
-                Row r = table.createRow(dataCellTemplateEven.getCellHeight(), getTable().getCurrentPage());
+                Row r = table.createRow(dataCellTemplateEven.getCellHeight(), table.getCurrentPage());
                 for (int i = 0; i <= numcols; i++) {
                     // Choose the correct template for the cell
                     Cell template = dataCellTemplateEven;
@@ -403,7 +403,7 @@ public class DataTable {
             if (isHeader) {
                 // Add Header Row
                 // Row h = table.createRow(headerCellTemplate.getCellHeight());
-                Row h = table.createRow(headerCellTemplate.getCellHeight(), getTable().getCurrentPage());
+                Row h = table.createRow(headerCellTemplate.getCellHeight(), table.getCurrentPage());
                 for (int i = 0; i <= numcols; i++) {
                     String cellValue = line.get(i);
                     Cell c = h.createCell(colWidths.get(i), cellValue, headerCellTemplate.getAlign(),
@@ -416,7 +416,7 @@ public class DataTable {
                 isHeader = false;
             } else {
                 //Row r = table.createRow(dataCellTemplateEven.getCellHeight());
-                Row r = table.createRow(dataCellTemplateEven.getCellHeight(), getTable().getCurrentPage());
+                Row r = table.createRow(dataCellTemplateEven.getCellHeight(), table.getCurrentPage());
                 for (int i = 0; i <= numcols; i++) {
                     // Choose the correct template for the cell
                     Cell template = dataCellTemplateEven;
