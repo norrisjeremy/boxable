@@ -277,7 +277,6 @@ public class DataTable {
                     String cellValue = line.get(i);
                     float textWidth = FontUtils.getStringWidth(headerCellTemplate.getFont(), " " + cellValue + " ",
                             headerCellTemplate.getFontSize());
-                    float widthPct = textWidth * 100 / table.getWidth();
                     totalWidth += textWidth;
                     numcols = i;
                 }
@@ -377,7 +376,6 @@ public class DataTable {
                     String cellValue = line.get(i);
                     float textWidth = FontUtils.getStringWidth(headerCellTemplate.getFont(), " " + cellValue + " ",
                             headerCellTemplate.getFontSize());
-                    float widthPct = textWidth * 100 / table.getWidth();
                     totalWidth += textWidth;
                     numcols = i;
                 }
