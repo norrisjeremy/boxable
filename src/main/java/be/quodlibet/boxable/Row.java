@@ -17,6 +17,7 @@ public class Row<T extends PDPage> {
 
     private final Table<T> table;
     private PDPage page;
+    private float yStart;
     PDOutlineItem bookmark;
     List<Cell<T>> cells;
     private boolean headerRow = false;
@@ -257,6 +258,14 @@ public class Row<T extends PDPage> {
 
     public void setPage(PDPage page) {
         this.page = page;
+    }
+
+    public float getYStart() {
+        return yStart;
+    }
+
+    public void setYStart(float yStart) {
+        this.yStart = yStart;
     }
 
 }
