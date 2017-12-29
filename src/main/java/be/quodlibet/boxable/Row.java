@@ -16,7 +16,7 @@ import be.quodlibet.boxable.image.Image;
 public class Row<T extends PDPage> {
 
     private final Table<T> table;
-    private final PDPage page;
+    private PDPage page;
     PDOutlineItem bookmark;
     List<Cell<T>> cells;
     private boolean headerRow = false;
@@ -253,6 +253,10 @@ public class Row<T extends PDPage> {
 
     public PDPage getPage() {
         return page;
+    }
+
+    public void setPage(PDPage page) {
+        this.page = page;
     }
 
 }
