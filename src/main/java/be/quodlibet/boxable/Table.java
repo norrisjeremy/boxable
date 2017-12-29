@@ -32,17 +32,17 @@ import be.quodlibet.boxable.utils.PDStreamUtils;
 import java.io.UncheckedIOException;
 
 public abstract class Table<T extends PDPage> {
-
+    
     public final PDDocument document;
     private float margin;
-
+    
     private T currentPage;
     private PDPageContentStream tableContentStream;
     private List<PDOutlineItem> bookmarks;
     private List<Row<T>> header = new ArrayList<>();
     private List<Row<T>> rows = new ArrayList<>();
     private List<T> pages = new ArrayList<>();
-
+    
     private final float yStartNewPage;
     private float yStart;
     private final float width;
@@ -50,17 +50,17 @@ public abstract class Table<T extends PDPage> {
     private final boolean drawContent;
     private final float headerBottomMargin = 4f;
     private float lineSpacing = 1f;
-
+    
     private boolean tableIsBroken = false;
     private boolean tableStartedAtNewPage = false;
     private boolean removeTopBorders = false;
-
+    
     private PageProvider<T> pageProvider;
 
     // page margins
     private final float pageTopMargin;
     private final float pageBottomMargin;
-
+    
     private boolean drawDebug;
 
     /**
@@ -102,7 +102,7 @@ public abstract class Table<T extends PDPage> {
             boolean drawLines, boolean drawContent) throws IOException {
         this(yStartNewPage, 0, pageBottomMargin, width, margin, document, drawLines, drawContent, null);
     }
-
+    
     public Table(float yStart, float yStartNewPage, float pageTopMargin, float pageBottomMargin, float width,
             float margin, PDDocument document, T currentPage, boolean drawLines, boolean drawContent,
             PageProvider<T> pageProvider) throws IOException {
@@ -120,7 +120,7 @@ public abstract class Table<T extends PDPage> {
         this.pageProvider = pageProvider;
         loadFonts();
     }
-
+    
     public Table(float yStartNewPage, float pageTopMargin, float pageBottomMargin, float width, float margin,
             PDDocument document, boolean drawLines, boolean drawContent, PageProvider<T> pageProvider)
             throws IOException {
@@ -141,34 +141,34 @@ public abstract class Table<T extends PDPage> {
         pages.add(nextPage);
         this.currentPage = nextPage;
     }
-
+    
     protected abstract void loadFonts() throws IOException;
-
+    
     protected PDType0Font loadFont(String fontPath) throws IOException {
         return FontUtils.loadFont(getDocument(), fontPath);
     }
-
+    
     protected PDDocument getDocument() {
         return document;
     }
-
+    
     public void drawTitle(String title, PDFont font, int fontSize, float tableWidth, float height, String alignment,
             float freeSpaceForPageBreak, boolean drawHeaderMargin) throws IOException {
         drawTitle(title, font, fontSize, tableWidth, height, alignment, freeSpaceForPageBreak, null, drawHeaderMargin);
     }
-
+    
     public void drawTitle(String title, PDFont font, int fontSize, float tableWidth, float height, String alignment,
             float freeSpaceForPageBreak, WrappingFunction wrappingFunction, boolean drawHeaderMargin)
             throws IOException {
-
+        
         ensureStreamIsOpen();
-
+        
         if (isEndOfPage(freeSpaceForPageBreak)) {
             this.tableContentStream.close();
             pageBreak();
             tableStartedAtNewPage = true;
         }
-
+        
         if (title == null) {
             // if you don't have title just use the height of maxTextBox in your "row"
             yStart -= height;
@@ -182,22 +182,22 @@ public abstract class Table<T extends PDPage> {
                     yStart -= (height - paragraph.getHeight());
                 }
             }
-
+            
             if (drawDebug) {
                 // margin
                 PDStreamUtils.rect(tableContentStream, margin, yStart, width, headerBottomMargin, Color.CYAN);
             }
         }
-
+        
         if (drawHeaderMargin) {
             yStart -= headerBottomMargin;
         }
     }
-
+    
     public float getWidth() {
         return width;
     }
-
+    
     @Deprecated
     public Row<T> createRow(float height) {
         Row<T> row = new Row<>(this, height);
@@ -205,7 +205,7 @@ public abstract class Table<T extends PDPage> {
         this.rows.add(row);
         return row;
     }
-
+    
     @Deprecated
     public Row<T> createRow(List<Cell<T>> cells, float height) {
         Row<T> row = new Row<>(this, cells, height);
@@ -213,24 +213,24 @@ public abstract class Table<T extends PDPage> {
         this.rows.add(row);
         return row;
     }
-
+    
     public Row<T> createRow(float height, PDPage page) {
         Row<T> row = new Row<>(this, height, page);
         row.setLineSpacing(lineSpacing);
         this.rows.add(row);
         return row;
     }
-
+    
     public Row<T> createRow(List<Cell<T>> cells, float height, PDPage page) {
         Row<T> row = new Row<>(this, cells, height, page);
         row.setLineSpacing(lineSpacing);
         this.rows.add(row);
         return row;
     }
-
+    
     public float draw() throws IOException {
         ensureStreamIsOpen();
-
+        
         for (Row<T> row : rows) {
             if (header.contains(row)) {
                 // check if header row height and first data row height can fit the page
@@ -242,11 +242,11 @@ public abstract class Table<T extends PDPage> {
             }
             drawRow(row);
         }
-
+        
         endTable();
         return yStart;
     }
-
+    
     private void drawRow(Row<T> row) throws IOException {
         // if it is not header row or first row in the table then remove row's top border
         if (row != header && row != rows.get(0)) {
@@ -266,7 +266,7 @@ public abstract class Table<T extends PDPage> {
 
         // we want to remove the borders as often as possible
         removeTopBorders = true;
-
+        
         if (isEndOfPage(row)) {
 
             // Draw line at bottom of table
@@ -291,7 +291,7 @@ public abstract class Table<T extends PDPage> {
         if (row == rows.get(0)) {
             removeTopBorders = false;
         }
-
+        
         if (removeTopBorders) {
             row.removeTopBorders();
         }
@@ -300,18 +300,20 @@ public abstract class Table<T extends PDPage> {
         if (row == rows.get(0)) {
             removeTopBorders = false;
         }
-
+        
         if (removeTopBorders) {
             row.removeTopBorders();
         }
-
+        
         if (drawLines) {
             drawVerticalLines(row);
         }
-
+        
         if (drawContent) {
             drawCellContent(row);
         }
+        
+        row.setPage(this.currentPage);
     }
 
     /**
@@ -331,7 +333,7 @@ public abstract class Table<T extends PDPage> {
             pages.add(nextPage);
             return nextPage;
         }
-
+        
         return createPage();
     }
 
@@ -345,23 +347,23 @@ public abstract class Table<T extends PDPage> {
         throw new IllegalStateException(
                 "You either have to provide a " + PageProvider.class.getCanonicalName() + " or override this method");
     }
-
+    
     private PDPageContentStream createPdPageContentStream() throws IOException {
         return new PDPageContentStream(getDocument(), getCurrentPage(), true, true);
     }
-
+    
     private void drawCellContent(Row<T> row) throws IOException {
 
         // position into first cell (horizontal)
         float cursorX = margin;
         float cursorY;
-
+        
         for (Cell<T> cell : row.getCells()) {
             // remember horizontal cursor position, so we can advance to the next cell easily later
             float cellStartX = cursorX;
             if (cell instanceof ImageCell) {
                 final ImageCell<T> imageCell = (ImageCell<T>) cell;
-
+                
                 cursorY = yStart - cell.getTopPadding()
                         - (cell.getTopBorder() == null ? 0 : cell.getTopBorder().getWidth());
 
@@ -376,7 +378,7 @@ public abstract class Table<T extends PDPage> {
                         cursorY -= cell.getVerticalFreeSpace();
                         break;
                 }
-
+                
                 cursorX += cell.getLeftPadding() + (cell.getLeftBorder() == null ? 0 : cell.getLeftBorder().getWidth());
 
                 // image cell horizontal alignment
@@ -391,7 +393,7 @@ public abstract class Table<T extends PDPage> {
                         break;
                 }
                 imageCell.getImage().draw(document, tableContentStream, cursorX, cursorY);
-
+                
             } else {
                 // no text without font
                 if (cell.getFont() == null) {
@@ -400,7 +402,7 @@ public abstract class Table<T extends PDPage> {
 
                 // font settings
                 this.tableContentStream.setFont(cell.getFont(), cell.getFontSize());
-
+                
                 if (cell.isTextRotated()) {
                     // debugging mode - drawing (default!) padding of rotated cells
                     //left
@@ -414,7 +416,7 @@ public abstract class Table<T extends PDPage> {
 
                     cursorY = yStart - cell.getInnerHeight() - cell.getTopPadding()
                             - (cell.getTopBorder() != null ? cell.getTopBorder().getWidth() : 0);
-
+                    
                     switch (cell.getAlign()) {
                         case CENTER:
                             cursorY += cell.getVerticalFreeSpace() / 2;
@@ -430,7 +432,7 @@ public abstract class Table<T extends PDPage> {
                             + (cell.getLeftBorder() == null ? 0 : cell.getLeftBorder().getWidth())
                             + FontUtils.getHeight(cell.getFont(), cell.getFontSize())
                             + FontUtils.getDescent(cell.getFont(), cell.getFontSize());
-
+                    
                     switch (cell.getValign()) {
                         case TOP:
                             break;
@@ -441,7 +443,7 @@ public abstract class Table<T extends PDPage> {
                             cursorX += cell.getHorizontalFreeSpace();
                             break;
                     }
-
+                    
                 } else {
                     // debugging mode - drawing (default!) padding of rotated cells
                     //left
@@ -458,7 +460,7 @@ public abstract class Table<T extends PDPage> {
                     cursorY = yStart - cell.getTopPadding() - FontUtils.getHeight(cell.getFont(), cell.getFontSize())
                             - FontUtils.getDescent(cell.getFont(), cell.getFontSize())
                             - (cell.getTopBorder() == null ? 0 : cell.getTopBorder().getWidth());
-
+                    
                     if (drawDebug) {
                         // @formatter:off 
                         // top padding
@@ -488,7 +490,7 @@ public abstract class Table<T extends PDPage> {
                             cursorX += cell.getHorizontalFreeSpace();
                             break;
                     }
-
+                    
                     switch (cell.getValign()) {
                         case TOP:
                             break;
@@ -499,7 +501,7 @@ public abstract class Table<T extends PDPage> {
                             cursorY -= cell.getVerticalFreeSpace();
                             break;
                     }
-
+                    
                 }
 
                 // remember this horizontal position, as it is the anchor for each
@@ -512,7 +514,7 @@ public abstract class Table<T extends PDPage> {
                     this.tableContentStream.setFont(cell.getParagraph().getFont(true, false), cell.getFontSize());
                 }
                 this.tableContentStream.setNonStrokingColor(cell.getTextColor());
-
+                
                 int italicCounter = 0;
                 int boldCounter = 0;
 
@@ -665,30 +667,30 @@ public abstract class Table<T extends PDPage> {
         }
         // Set Y position for next row
         yStart = yStart - row.getHeight();
-
+        
     }
-
+    
     private void drawVerticalLines(Row<T> row) throws IOException {
         float xStart = margin;
 
         // give an extra margin to the latest cell
         float xEnd = row.xEnd();
-
+        
         Iterator<Cell<T>> cellIterator = row.getCells().iterator();
         while (cellIterator.hasNext()) {
             Cell<T> cell = cellIterator.next();
-
+            
             fillCellColor(cell, yStart, xStart, cellIterator);
-
+            
             drawCellBorders(row, cell, xStart, xEnd);
-
+            
             xStart += getWidth(cell, cellIterator);
         }
-
+        
     }
-
+    
     private void drawCellBorders(Row<T> row, Cell<T> cell, float xStart, float xEnd) throws IOException {
-
+        
         float yEnd = yStart - row.getHeight();
 
         // top
@@ -719,9 +721,9 @@ public abstract class Table<T extends PDPage> {
             float x = xStart + leftBorder.getWidth() / 2;
             drawLine(x, yStart, x, yEnd + (bottomBorder == null ? 0 : bottomBorder.getWidth()), leftBorder);
         }
-
+        
     }
-
+    
     private void drawLine(float xStart, float yStart, float xEnd, float yEnd, LineStyle border) throws IOException {
         PDStreamUtils.setLineStyles(tableContentStream, border);
         tableContentStream.moveTo(xStart, yStart);
@@ -729,17 +731,17 @@ public abstract class Table<T extends PDPage> {
         tableContentStream.stroke();
         tableContentStream.closePath();
     }
-
+    
     private void fillCellColor(Cell<T> cell, float yStart, float xStart, Iterator<Cell<T>> cellIterator)
             throws IOException {
-
+        
         if (cell.getFillColor() != null) {
             this.tableContentStream.setNonStrokingColor(cell.getFillColor());
 
             // y start is bottom pos
             yStart = yStart - cell.getHeight();
             float height = cell.getHeight() - (cell.getTopBorder() == null ? 0 : cell.getTopBorder().getWidth());
-
+            
             float cellWidth = getWidth(cell, cellIterator);
             this.tableContentStream.addRect(xStart, yStart, cellWidth, height);
             this.tableContentStream.fill();
@@ -749,7 +751,7 @@ public abstract class Table<T extends PDPage> {
             this.tableContentStream.setNonStrokingColor(Color.BLACK);
         }
     }
-
+    
     private float getWidth(Cell<T> cell, Iterator<Cell<T>> cellIterator) {
         float width;
         if (cellIterator.hasNext()) {
@@ -759,22 +761,22 @@ public abstract class Table<T extends PDPage> {
         }
         return width;
     }
-
+    
     private void ensureStreamIsOpen() throws IOException {
         if (tableContentStream == null) {
             tableContentStream = createPdPageContentStream();
         }
     }
-
+    
     private void endTable() throws IOException {
         this.tableContentStream.close();
     }
-
+    
     public T getCurrentPage() {
         checkNotNull(this.currentPage, "No current page defined.");
         return this.currentPage;
     }
-
+    
     private boolean isEndOfPage(Row<T> row) {
         float currentY = yStart - row.getHeight();
         boolean isEndOfPage = currentY <= pageBottomMargin;
@@ -789,7 +791,7 @@ public abstract class Table<T extends PDPage> {
         // manually using getNextYPos
         return isEndOfPage;
     }
-
+    
     private boolean isEndOfPage(float freeSpaceForPageBreak) {
         float currentY = yStart - freeSpaceForPageBreak;
         boolean isEndOfPage = currentY <= pageBottomMargin;
@@ -798,21 +800,21 @@ public abstract class Table<T extends PDPage> {
         }
         return isEndOfPage;
     }
-
+    
     private void pageBreak() throws IOException {
         tableContentStream.close();
         this.yStart = yStartNewPage - pageTopMargin;
         this.currentPage = createNewPage();
         this.tableContentStream = createPdPageContentStream();
     }
-
+    
     private void addBookmark(PDOutlineItem bookmark) {
         if (bookmarks == null) {
             bookmarks = new ArrayList<>();
         }
         bookmarks.add(bookmark);
     }
-
+    
     public List<PDOutlineItem> getBookmarks() {
         return bookmarks;
     }
@@ -866,11 +868,11 @@ public abstract class Table<T extends PDPage> {
                 firstDataRowIndex++;
             }
         }
-
+        
         if (rows.size() > firstDataRowIndex) {
             height += rows.get(firstDataRowIndex).getHeight();
         }
-
+        
         return height;
     }
 
@@ -897,52 +899,52 @@ public abstract class Table<T extends PDPage> {
         if (header == null) {
             throw new IllegalArgumentException("Header Row not set on table");
         }
-
+        
         return header.get(header.size() - 1);
     }
-
+    
     public float getMargin() {
         return margin;
     }
-
+    
     protected void setYStart(float yStart) {
         this.yStart = yStart;
     }
-
+    
     public boolean isDrawDebug() {
         return drawDebug;
     }
-
+    
     public void setDrawDebug(boolean drawDebug) {
         this.drawDebug = drawDebug;
     }
-
+    
     public boolean tableIsBroken() {
         return tableIsBroken;
     }
-
+    
     public void setTableIsBroken(boolean tableIsBroken) {
         this.tableIsBroken = tableIsBroken;
     }
-
+    
     public List<Row<T>> getRows() {
         return rows;
     }
-
+    
     public boolean tableStartedAtNewPage() {
         return tableStartedAtNewPage;
     }
-
+    
     public float getLineSpacing() {
         return lineSpacing;
     }
-
+    
     public void setLineSpacing(float lineSpacing) {
         this.lineSpacing = lineSpacing;
     }
-
+    
     public List<T> getPages() {
         return pages;
     }
-
+    
 }
