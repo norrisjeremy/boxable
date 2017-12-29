@@ -667,6 +667,7 @@ public abstract class Table<T extends PDPage> {
         }
         // Set Y position for next row
         yStart = yStart - row.getHeight();
+        row.setYStart(yStart);
         
     }
     
