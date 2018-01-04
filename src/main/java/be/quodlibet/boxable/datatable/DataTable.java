@@ -84,18 +84,19 @@ public class DataTable {
      * </p>
      */
     private void setDefaultStyles() {
-        LineStyle thinline = new LineStyle(Color.BLACK, 2f);
+        LineStyle thinLine = new LineStyle(Color.DARK_GRAY, 0.75f);
+        LineStyle thickLine = new LineStyle(Color.DARK_GRAY, 1.2f);
         // Header style
         headerCellTemplate.setFillColor(new Color(137, 218, 245));
         headerCellTemplate.setTextColor(Color.BLACK);
         headerCellTemplate.setFont((headerFont == null) ? PDType1Font.HELVETICA_BOLD : headerFont);
-        headerCellTemplate.setBorderStyle(thinline);
+        headerCellTemplate.setBorderStyle(thickLine);
 
         // Normal cell style, all rows and columns are the same by default
         defaultCellTemplate.setFillColor(new Color(242, 242, 242));
         defaultCellTemplate.setTextColor(Color.BLACK);
         defaultCellTemplate.setFont((bodyFont == null) ? PDType1Font.HELVETICA : bodyFont);
-        defaultCellTemplate.setBorderStyle(thinline);
+        defaultCellTemplate.setBorderStyle(thickLine);
 
         dataCellTemplateEven.copyCellStyle(defaultCellTemplate);
         dataCellTemplateOdd.copyCellStyle(defaultCellTemplate);
