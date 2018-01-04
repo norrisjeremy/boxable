@@ -24,7 +24,6 @@ public class Row<T extends PDPage> {
     float height;
     private float lineSpacing = 1;
 
-    @Deprecated
     Row(Table<T> table, List<Cell<T>> cells, float height) {
         this.table = table;
         this.cells = cells;
@@ -32,26 +31,11 @@ public class Row<T extends PDPage> {
         this.page = null;
     }
 
-    @Deprecated
     Row(Table<T> table, float height) {
         this.table = table;
         this.cells = new ArrayList<>();
         this.height = height;
         this.page = null;
-    }
-
-    Row(Table<T> table, List<Cell<T>> cells, float height, PDPage page) {
-        this.table = table;
-        this.cells = cells;
-        this.height = height;
-        this.page = page;
-    }
-
-    Row(Table<T> table, float height, PDPage page) {
-        this.table = table;
-        this.cells = new ArrayList<>();
-        this.height = height;
-        this.page = page;
     }
 
     /**
