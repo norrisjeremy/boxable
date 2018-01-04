@@ -198,7 +198,6 @@ public abstract class Table<T extends PDPage> {
         return width;
     }
     
-    @Deprecated
     public Row<T> createRow(float height) {
         Row<T> row = new Row<>(this, height);
         row.setLineSpacing(lineSpacing);
@@ -206,23 +205,8 @@ public abstract class Table<T extends PDPage> {
         return row;
     }
     
-    @Deprecated
     public Row<T> createRow(List<Cell<T>> cells, float height) {
         Row<T> row = new Row<>(this, cells, height);
-        row.setLineSpacing(lineSpacing);
-        this.rows.add(row);
-        return row;
-    }
-    
-    public Row<T> createRow(float height, PDPage page) {
-        Row<T> row = new Row<>(this, height, page);
-        row.setLineSpacing(lineSpacing);
-        this.rows.add(row);
-        return row;
-    }
-    
-    public Row<T> createRow(List<Cell<T>> cells, float height, PDPage page) {
-        Row<T> row = new Row<>(this, cells, height, page);
         row.setLineSpacing(lineSpacing);
         this.rows.add(row);
         return row;
