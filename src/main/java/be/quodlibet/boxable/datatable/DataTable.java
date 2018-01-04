@@ -222,6 +222,7 @@ public class DataTable {
      * @param data {@link Table}'s data
      * @param hasHeader boolean if {@link Table} has header
      * @throws IOException parsing error
+     * @deprecated use {@link #putListData()}
      */
     public void addStringListToTable(List<List<String>> data, Boolean hasHeader) throws IOException {
         char separator = ';';
@@ -301,8 +302,7 @@ public class DataTable {
             }
             if (isHeader) {
                 // Add Header Row
-                // Row h = table.createRow(headerCellTemplate.getCellHeight());
-                Row h = table.createRow(headerCellTemplate.getCellHeight(), table.getCurrentPage());
+                Row h = table.createRow(headerCellTemplate.getCellHeight());
                 for (int i = 0; i <= numcols; i++) {
                     String cellValue = line.get(i);
                     Cell c = h.createCell(colWidths.get(i), cellValue, headerCellTemplate.getAlign(),
@@ -314,8 +314,7 @@ public class DataTable {
                 table.addHeaderRow(h);
                 isHeader = false;
             } else {
-                //Row r = table.createRow(dataCellTemplateEven.getCellHeight());
-                Row r = table.createRow(dataCellTemplateEven.getCellHeight(), table.getCurrentPage());
+                Row r = table.createRow(dataCellTemplateEven.getCellHeight());
                 for (int i = 0; i <= numcols; i++) {
                     // Choose the correct template for the cell
                     Cell template = dataCellTemplateEven;
@@ -400,8 +399,7 @@ public class DataTable {
             }
             if (isHeader) {
                 // Add Header Row
-                // Row h = table.createRow(headerCellTemplate.getCellHeight());
-                Row h = table.createRow(headerCellTemplate.getCellHeight(), table.getCurrentPage());
+                Row h = table.createRow(headerCellTemplate.getCellHeight());
                 for (int i = 0; i <= numcols; i++) {
                     String cellValue = line.get(i);
                     Cell c = h.createCell(colWidths.get(i), cellValue, headerCellTemplate.getAlign(),
@@ -413,8 +411,7 @@ public class DataTable {
                 table.addHeaderRow(h);
                 isHeader = false;
             } else {
-                //Row r = table.createRow(dataCellTemplateEven.getCellHeight());
-                Row r = table.createRow(dataCellTemplateEven.getCellHeight(), table.getCurrentPage());
+                Row r = table.createRow(dataCellTemplateEven.getCellHeight());
                 for (int i = 0; i <= numcols; i++) {
                     // Choose the correct template for the cell
                     Cell template = dataCellTemplateEven;
