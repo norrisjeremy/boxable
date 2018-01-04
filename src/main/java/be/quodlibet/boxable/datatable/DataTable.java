@@ -84,7 +84,7 @@ public class DataTable {
      * </p>
      */
     private void setDefaultStyles() {
-        LineStyle thinline = new LineStyle(Color.BLACK, 0.75f);
+        LineStyle thinline = new LineStyle(Color.BLACK, 2f);
         // Header style
         headerCellTemplate.setFillColor(new Color(137, 218, 245));
         headerCellTemplate.setTextColor(Color.BLACK);

@@ -36,10 +36,10 @@ public class Cell<T extends PDPage> {
 	private float bottomPadding = 5f;
 
 	// default border
-	private LineStyle leftBorderStyle = new LineStyle(Color.BLACK, 1);
-	private LineStyle rightBorderStyle = new LineStyle(Color.BLACK, 1);
-	private LineStyle topBorderStyle = new LineStyle(Color.BLACK, 1);
-	private LineStyle bottomBorderStyle = new LineStyle(Color.BLACK, 1);
+	private LineStyle leftBorderStyle = new LineStyle(Color.BLACK, 2f);
+	private LineStyle rightBorderStyle = new LineStyle(Color.BLACK, 2f);
+	private LineStyle topBorderStyle = new LineStyle(Color.BLACK, 2f);
+	private LineStyle bottomBorderStyle = new LineStyle(Color.BLACK, 2f);
 
 	private Paragraph paragraph = null;
 	private float lineSpacing = 1;
