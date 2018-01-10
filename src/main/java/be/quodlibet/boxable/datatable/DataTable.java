@@ -439,4 +439,56 @@ public class DataTable {
         }
 
     }
+
+    public void putListData(List<List<String>> data, Boolean hasHeader, Map<Integer, Float> colToWidths) {
+        if (data == null || data.isEmpty()) {
+            return;
+        }
+        Boolean isHeader = hasHeader;
+        Boolean odd = true;
+        int numcols = data.get(0).size();
+
+        for (List<String> line : data) {
+
+            if (isHeader) {
+                // Add Header Row
+                Row h = table.createRow(headerCellTemplate.getCellHeight());
+                for (int i = 0; i <= numcols; i++) {
+                    String cellValue = line.get(i);
+                    Cell c = h.createCell(colToWidths.get(i), cellValue, headerCellTemplate.getAlign(),
+                            headerCellTemplate.getValign());
+                    // Apply style of header cell to this cell
+                    c.copyCellStyle(headerCellTemplate);
+                    c.setText(cellValue);
+                }
+                table.addHeaderRow(h);
+                isHeader = false;
+            } else {
+                Row r = table.createRow(dataCellTemplateEven.getCellHeight());
+                for (int i = 0; i <= numcols; i++) {
+                    // Choose the correct template for the cell
+                    Cell template = dataCellTemplateEven;
+                    if (odd) {
+                        template = dataCellTemplateOdd;
+                    }
+                    if (i == 0 & !firstColumnCellTemplate.hasSameStyle(defaultCellTemplate)) {
+                        template = firstColumnCellTemplate;
+                    }
+                    if (i == numcols & !lastColumnCellTemplate.hasSameStyle(defaultCellTemplate)) {
+                        template = lastColumnCellTemplate;
+                    }
+                    String cellValue = "";
+                    if (line.size() >= i) {
+                        cellValue = line.get(i);
+                    }
+                    Cell c = r.createCell(colToWidths.get(i), cellValue, template.getAlign(), template.getValign());
+                    // Apply style of header cell to this cell
+                    c.copyCellStyle(template);
+                    c.setText(cellValue);
+                }
+            }
+            odd = !odd;
+        }
+
+    }
 }
