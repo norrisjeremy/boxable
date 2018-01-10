@@ -453,7 +453,7 @@ public class DataTable {
             if (isHeader) {
                 // Add Header Row
                 Row h = table.createRow(headerCellTemplate.getCellHeight());
-                for (int i = 0; i <= numcols; i++) {
+                for (int i = 0; i < numcols; i++) {
                     String cellValue = line.get(i);
                     Cell c = h.createCell(colToWidths.get(i), cellValue, headerCellTemplate.getAlign(),
                             headerCellTemplate.getValign());
@@ -465,7 +465,7 @@ public class DataTable {
                 isHeader = false;
             } else {
                 Row r = table.createRow(dataCellTemplateEven.getCellHeight());
-                for (int i = 0; i <= numcols; i++) {
+                for (int i = 0; i < numcols; i++) {
                     // Choose the correct template for the cell
                     Cell template = dataCellTemplateEven;
                     if (odd) {
