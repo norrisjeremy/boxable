@@ -87,7 +87,8 @@ public class DataTable {
         LineStyle thinLine = new LineStyle(Color.DARK_GRAY, 0.75f);
         LineStyle thickLine = new LineStyle(Color.DARK_GRAY, 1.2f);
         // Header style
-        headerCellTemplate.setFillColor(new Color(137, 218, 245));
+//        headerCellTemplate.setFillColor(new Color(137, 218, 245));
+        headerCellTemplate.setFillColor(Color.LIGHT_GRAY);
         headerCellTemplate.setTextColor(Color.BLACK);
         headerCellTemplate.setFont((headerFont == null) ? PDType1Font.HELVETICA_BOLD : headerFont);
         headerCellTemplate.setBorderStyle(thickLine);
