@@ -62,10 +62,10 @@ public class Cell<T extends PDPage> {
 	 * @param text
 	 * @param isCalculated
 	 * @see Cell#Cell(Row, float, String, boolean, HorizontalAlignment,
-	 *      VerticalAlignment, boolean)
+	 *      VerticalAlignment, float)
 	 */
 	Cell(Row<T> row, float width, String text, boolean isCalculated) {
-		this(row, width, text, isCalculated, HorizontalAlignment.LEFT, VerticalAlignment.TOP, true);
+		this(row, width, text, isCalculated, HorizontalAlignment.LEFT, VerticalAlignment.TOP, 8);
 	}
 
 	/**
@@ -90,9 +90,9 @@ public class Cell<T extends PDPage> {
 	 * @see Cell#Cell(Row, float, String, boolean)
 	 */
 	Cell(Row<T> row, float width, String text, boolean isCalculated, HorizontalAlignment align,
-			VerticalAlignment valign, boolean isStandard) {
+			VerticalAlignment valign, float fontSize) {
 
-		if (!isStandard) this.fontSize = 6;
+		this.fontSize = fontSize;
 
 		this.row = row;
 		if (isCalculated) {

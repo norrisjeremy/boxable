@@ -76,8 +76,8 @@ public class Row<T extends PDPage> {
         return cell;
     }
 
-    public Cell<T> createImageCell(float width, Image img, HorizontalAlignment align, VerticalAlignment valign, boolean isStandard) {
-        Cell<T> cell = new ImageCell<>(this, width, img, true, align, valign, isStandard);
+    public Cell<T> createImageCell(float width, Image img, HorizontalAlignment align, VerticalAlignment valign, float fontSize) {
+        Cell<T> cell = new ImageCell<>(this, width, img, true, align, valign, fontSize);
         setBorders(cell, cells.isEmpty());
         cells.add(cell);
         return cell;
@@ -95,8 +95,8 @@ public class Row<T extends PDPage> {
      * @param valign Cell's {@link VerticalAlignment}
      * @return New {@link Cell}
      */
-    public Cell<T> createCell(float width, String value, HorizontalAlignment align, VerticalAlignment valign, boolean isStandard) {
-        Cell<T> cell = new Cell<>(this, width, value, true, align, valign, isStandard);
+    public Cell<T> createCell(float width, String value, HorizontalAlignment align, VerticalAlignment valign, float fontSize) {
+        Cell<T> cell = new Cell<>(this, width, value, true, align, valign, fontSize);
         if (headerRow) {
             // set all cell as header cell
             cell.setHeaderCell(true);
