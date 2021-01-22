@@ -27,8 +27,8 @@ public class ImageCell<T extends PDPage> extends Cell<T> {
 	}
 
 	ImageCell(Row<T> row, float width, Image image, boolean isCalculated, HorizontalAlignment align,
-			VerticalAlignment valign) {
-		super(row, width, null, isCalculated, align, valign);
+			VerticalAlignment valign, boolean isStandard) {
+		super(row, width, null, isCalculated, align, valign, isStandard);
 		this.img = image;
 		if(image.getWidth() > getInnerWidth()){
 			scaleToFit();

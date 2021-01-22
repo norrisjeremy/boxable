@@ -40,6 +40,8 @@ public class DataTable {
     private final PDFont bodyFont;
     private final PDFont headerFont;
 
+    private Boolean isStandard = true;
+
     /**
      * <p>
      * Create a CSVTable object to be able to add CSV document to a Table. A
@@ -52,13 +54,14 @@ public class DataTable {
      * @throws IOException If there is an error releasing resources
      */
     public DataTable(Table table, PDPage page) throws IOException {
-        this(table, page, null, null);
+        this(table, page, null, null, true);
     }
 
-    public DataTable(Table table, PDPage page, PDFont bodyFont, PDFont headerFont) throws IOException {
+    public DataTable(Table table, PDPage page, PDFont bodyFont, PDFont headerFont, boolean isStandard) throws IOException {
         this.table = table;
         this.bodyFont = bodyFont;
         this.headerFont = headerFont;
+        this.isStandard = isStandard;
         // Create a dummy pdf document, page and table to create template cells
         try (PDDocument ddoc = new PDDocument()) {
             PDPage dpage = new PDPage();
@@ -67,12 +70,12 @@ public class DataTable {
             ddoc.addPage(dpage);
             BaseTable dummyTable = new BaseTable(10f, 10f, 10f, table.getWidth(), 10f, ddoc, dpage, false, false);
             Row dr = dummyTable.createRow(0f);
-            headerCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE);
-            dataCellTemplateEven = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-            dataCellTemplateOdd = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-            firstColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-            lastColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
-            defaultCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE);
+            headerCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.CENTER, VerticalAlignment.MIDDLE, isStandard);
+            dataCellTemplateEven = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE, isStandard);
+            dataCellTemplateOdd = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE, isStandard);
+            firstColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE, isStandard);
+            lastColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE, isStandard);
+            defaultCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE, isStandard);
             setDefaultStyles();
         }
     }
@@ -224,7 +227,7 @@ public class DataTable {
      * @param data {@link Table}'s data
      * @param hasHeader boolean if {@link Table} has header
      * @throws IOException parsing error
-     * @deprecated use {@link #putListData()}
+     * @deprecated use
      */
     public void addStringListToTable(List<List<String>> data, Boolean hasHeader) throws IOException {
         char separator = ';';
@@ -308,7 +311,7 @@ public class DataTable {
                 for (int i = 0; i <= numcols; i++) {
                     String cellValue = line.get(i);
                     Cell c = h.createCell(colWidths.get(i), cellValue, headerCellTemplate.getAlign(),
-                            headerCellTemplate.getValign());
+                            headerCellTemplate.getValign(), isStandard);
                     // Apply style of header cell to this cell
                     c.copyCellStyle(headerCellTemplate);
                     c.setText(cellValue);
@@ -333,7 +336,7 @@ public class DataTable {
                     if (line.size() >= i) {
                         cellValue = line.get(i);
                     }
-                    Cell c = r.createCell(colWidths.get(i), cellValue, template.getAlign(), template.getValign());
+                    Cell c = r.createCell(colWidths.get(i), cellValue, template.getAlign(), template.getValign(), isStandard);
                     // Apply style of header cell to this cell
                     c.copyCellStyle(template);
                     c.setText(cellValue);
@@ -405,7 +408,7 @@ public class DataTable {
                 for (int i = 0; i <= numcols; i++) {
                     String cellValue = line.get(i);
                     Cell c = h.createCell(colWidths.get(i), cellValue, headerCellTemplate.getAlign(),
-                            headerCellTemplate.getValign());
+                            headerCellTemplate.getValign(), isStandard);
                     // Apply style of header cell to this cell
                     c.copyCellStyle(headerCellTemplate);
                     c.setText(cellValue);
@@ -430,7 +433,7 @@ public class DataTable {
                     if (line.size() >= i) {
                         cellValue = line.get(i);
                     }
-                    Cell c = r.createCell(colWidths.get(i), cellValue, template.getAlign(), template.getValign());
+                    Cell c = r.createCell(colWidths.get(i), cellValue, template.getAlign(), template.getValign(), isStandard);
                     // Apply style of header cell to this cell
                     c.copyCellStyle(template);
                     c.setText(cellValue);
@@ -457,7 +460,7 @@ public class DataTable {
                 for (int i = 0; i < numcols; i++) {
                     String cellValue = line.get(i);
                     Cell c = h.createCell(colToWidths.get(i), cellValue, headerCellTemplate.getAlign(),
-                            headerCellTemplate.getValign());
+                            headerCellTemplate.getValign(), isStandard);
                     // Apply style of header cell to this cell
                     c.copyCellStyle(headerCellTemplate);
                     c.setText(cellValue);
@@ -482,7 +485,7 @@ public class DataTable {
                     if (line.size() >= i) {
                         cellValue = line.get(i);
                     }
-                    Cell c = r.createCell(colToWidths.get(i), cellValue, template.getAlign(), template.getValign());
+                    Cell c = r.createCell(colToWidths.get(i), cellValue, template.getAlign(), template.getValign(), isStandard);
                     // Apply style of header cell to this cell
                     c.copyCellStyle(template);
                     c.setText(cellValue);
