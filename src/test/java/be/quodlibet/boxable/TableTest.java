@@ -323,38 +323,38 @@ public class TableTest {
 		// Create Header row
 		Row<PDPage> row = table.createRow(15f);
 		Cell<PDPage> cell = row.createCell((100 / 3f), "Hello", HorizontalAlignment.get("center"),
-				VerticalAlignment.get("top"));
+				VerticalAlignment.get("top"), 8);
 		cell.setTextRotated(true);
 		cell.setFont(PDType1Font.HELVETICA);
 		cell.setFontSize(6);
 
 		Cell<PDPage> cell2 = row.createCell((100 / 3f), "It's me", HorizontalAlignment.get("center"),
-				VerticalAlignment.get("middle"));
+				VerticalAlignment.get("middle"), 8);
 		cell2.setTextRotated(true);
 		cell2.setFont(PDType1Font.HELVETICA);
 		cell2.setFontSize(6);
 
 		Cell<PDPage> cell3 = row.createCell((100 / 3f), "I was wondering", HorizontalAlignment.get("center"),
-				VerticalAlignment.get("bottom"));
+				VerticalAlignment.get("bottom"), 8);
 		cell3.setTextRotated(true);
 		cell3.setFont(PDType1Font.HELVETICA);
 		cell3.setFontSize(6);
 
 		Row<PDPage> row2 = table.createRow(15f);
 		Cell<PDPage> cell4 = row2.createCell((100 / 3.0f), "Hello", HorizontalAlignment.get("center"),
-				VerticalAlignment.get("top"));
+				VerticalAlignment.get("top"), 8);
 		cell4.setFont(PDType1Font.HELVETICA);
 		cell4.setFontSize(6);
 
 		Cell<PDPage> cell5 = row2.createCell((100 / 3f), "can you hear me?", HorizontalAlignment.get("center"),
-				VerticalAlignment.get("middle"));
+				VerticalAlignment.get("middle"), 8);
 		cell5.setTextRotated(true);
 		cell5.setFont(PDType1Font.HELVETICA);
 		cell5.setFontSize(6);
 
 		Cell<PDPage> cell6 = row2.createCell((100 / 3f),
 				"I'm in California dreaming about who we used to be. When we were younger and free. I've forgotten how it felt before the world fell at our feet",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell6.setFont(PDType1Font.HELVETICA);
 		cell6.setFontSize(6);
 		table.draw();
@@ -518,31 +518,31 @@ public class TableTest {
 		// Create Header row
 		Row<PDPage> row = table.createRow(15f);
 		Cell<PDPage> cell = row.createCell((100 / 3f), "<b>Here is bold</b>", HorizontalAlignment.get("center"),
-				VerticalAlignment.get("top"));
+				VerticalAlignment.get("top"), 8);
 		cell.setFontSize(6);
 
 		Cell<PDPage> cell2 = row.createCell((100 / 3f), "<i>Here is text in italic</i>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"), 8);
 		cell2.setFontSize(6);
 
 		Cell<PDPage> cell3 = row.createCell((100 / 3f), "<b><i>Here is text in bold and italic</i></b>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell3.setFontSize(6);
 
 		Row<PDPage> row2 = table.createRow(15f);
 		Cell<PDPage> cell4 = row2.createCell((100 / 3.0f),
 				" <p>Integer eget elit vitae est feugiat laoreet. <b>Nam vitae ex commodo, euismod risus in, sodales dolor. Mauris condimentum urna neque, non condimentum odio</b> posuere a. Aenean nisl ex, semper eu malesuada sit amet, luctus nec enim. <br>Pellentesque eu ultrices magna, non porta dolor. Fus<b><i>ce eu neque nulla. Curabitur eu eros tristique leo efficitur fringilla sit amet sed neque. Aliquam</i></b> a tempor enim. Praesent pellentesque volutpat dolor, non rhoncus est posuere id. Aenean nunc purus, gravida at mauris et, pretium volutpat nisl. Mauris lacus urna, sodales ac eros in, mollis scelerisque neque.</p> Unordered List <ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("top"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("top"), 8);
 		cell4.setFontSize(6);
 
 		Cell<PDPage> cell5 = row2.createCell((100 / 3f),
 				"<p>Proin dui dolor, lacinia at dui at, placerat ullamcorper arcu. Sed auctor sagittis elit, at eleifend ex aliquet ut. Duis lobortis est nec placerat condimentum. Aliquam erat volutpat. In a sem massa. Phasellus eget tortor iaculis, condimentum turpis a, sodales lorem. Aenean egestas congue ex<i> eu condimentum. Fusce sed</i> fringilla lorem. Vestibulum luctus ni<b>si ac turpis congue, vitae pharetra lorem suscipit.</b></p>Ordered List <ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"), 8);
 		cell5.setFontSize(6);
 
 		Cell<PDPage> cell6 = row2.createCell((100 / 3f),
 				"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at bibendum leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lobortis enim vitae magna varius, nec scelerisque sapien elementum. Quisque porta eros in feugiat commodo. Phasellus a elit diam. Nullam pretium lorem malesuada, ullamcorper risus eget, dictum libero. Nulla neque ante, volutpat in tincidunt eu, porttitor ut purus. Fusce at mauris velit. Pellentesque vel tincidunt erat. </p><p>In vehicula velit nunc, sit amet ultricies neque fringilla vel. Quisque ac enim nisl. Ut quis leo et lorem iaculis porttitor a semper diam. Pellentesque lobortis nisi ac ipsum efficitur facilisis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent in tellus velit. Maecenas volutpat ipsum lacus, non fringilla neque faucibus et.</p>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell6.setFontSize(6);
 		table.draw();
 
@@ -578,15 +578,15 @@ public class TableTest {
 		Row<PDPage> row = table.createRow(15f);
 		Cell<PDPage> cell = row.createCell((100 / 3f),
 				"Hellooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("top"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("top"), 8);
 		cell.setFontSize(6);
 
 		Cell<PDPage> cell2 = row.createCell((100 / 3f), "<i>Here is text in italic</i>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"), 8);
 		cell2.setFontSize(6);
 
 		Cell<PDPage> cell3 = row.createCell((100 / 3f), "<b><i>Here is text in bold and italic</i></b>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell3.setFontSize(6);
 		table.draw();
 
@@ -623,33 +623,33 @@ public class TableTest {
 		Row<PDPage> row = table.createRow(400f);
 		Cell<PDPage> cell = row.createCell((100 / 3f),
 				"<p>Integer eget elit vitae est feugiat laoreet. <b>Nam vitae ex commodo, euismod risus in, sodales dolor. Mauris condimentum urna neque, non condimentum odio</b> posuere a. Aenean nisl ex, semper eu malesuada sit amet, luctus nec enim. <br>Pellentesque eu ultrices magna, non porta dolor. Fus<b><i>ce eu neque nulla. Curabitur eu eros tristique leo efficitur fringilla sit amet sed neque. Aliquam</i></b> a tempor enim. Praesent pellentesque volutpat dolor, non rhoncus est posuere id. Aenean nunc purus, gravida at mauris et, pretium volutpat nisl. Mauris lacus urna, sodales ac eros in, mollis scelerisque neque.</p> Unordered List <ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("top"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("top"), 8);
 		cell.setFontSize(6);
 
 		Cell<PDPage> cell2 = row.createCell((100 / 3f),
 				"<p>Proin dui dolor, lacinia at dui at, placerat ullamcorper arcu. Sed auctor sagittis elit, at eleifend ex aliquet ut. Duis lobortis est nec placerat condimentum. Aliquam erat volutpat. In a sem massa. Phasellus eget tortor iaculis, condimentum turpis a, sodales lorem. Aenean egestas congue ex<i> eu condimentum. Fusce sed</i> fringilla lorem. Vestibulum luctus ni<b>si ac turpis congue, vitae pharetra lorem suscipit.</b></p>Ordered List <ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"), 8);
 		cell2.setFontSize(6);
 
 		Cell<PDPage> cell3 = row.createCell((100 / 3f),
 				"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at bibendum leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lobortis enim vitae magna varius, nec scelerisque sapien elementum. Quisque porta eros in feugiat commodo. Phasellus a elit diam. Nullam pretium lorem malesuada, ullamcorper risus eget, dictum libero. Nulla neque ante, volutpat in tincidunt eu, porttitor ut purus. Fusce at mauris velit. Pellentesque vel tincidunt erat. </p><p>In vehicula velit nunc, sit amet ultricies neque fringilla vel. Quisque ac enim nisl. Ut quis leo et lorem iaculis porttitor a semper diam. Pellentesque lobortis nisi ac ipsum efficitur facilisis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent in tellus velit. Maecenas volutpat ipsum lacus, non fringilla neque faucibus et.</p>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell3.setFontSize(6);
 
 		Row<PDPage> row2 = table.createRow(400f);
 		Cell<PDPage> cell4 = row2.createCell((100 / 3.0f),
 				" <p>Integer eget elit vitae est feugiat laoreet. <b>Nam vitae ex commodo, euismod risus in, sodales dolor. Mauris condimentum urna neque, non condimentum odio</b> posuere a. Aenean nisl ex, semper eu malesuada sit amet, luctus nec enim. <br>Pellentesque eu ultrices magna, non porta dolor. Fus<b><i>ce eu neque nulla. Curabitur eu eros tristique leo efficitur fringilla sit amet sed neque. Aliquam</i></b> a tempor enim. Praesent pellentesque volutpat dolor, non rhoncus est posuere id. Aenean nunc purus, gravida at mauris et, pretium volutpat nisl. Mauris lacus urna, sodales ac eros in, mollis scelerisque neque.</p> Unordered List <ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("top"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("top"), 8);
 		cell4.setFontSize(6);
 
 		Cell<PDPage> cell5 = row2.createCell((100 / 3f),
 				"<p>Proin dui dolor, lacinia at dui at, placerat ullamcorper arcu. Sed auctor sagittis elit, at eleifend ex aliquet ut. Duis lobortis est nec placerat condimentum. Aliquam erat volutpat. In a sem massa. Phasellus eget tortor iaculis, condimentum turpis a, sodales lorem. Aenean egestas congue ex<i> eu condimentum. Fusce sed</i> fringilla lorem. Vestibulum luctus ni<b>si ac turpis congue, vitae pharetra lorem suscipit.</b></p>Ordered List <ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"), 8);
 		cell5.setFontSize(6);
 
 		Cell<PDPage> cell6 = row2.createCell((100 / 3f),
 				"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at bibendum leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lobortis enim vitae magna varius, nec scelerisque sapien elementum. Quisque porta eros in feugiat commodo. Phasellus a elit diam. Nullam pretium lorem malesuada, ullamcorper risus eget, dictum libero. Nulla neque ante, volutpat in tincidunt eu, porttitor ut purus. Fusce at mauris velit. Pellentesque vel tincidunt erat. </p><p>In vehicula velit nunc, sit amet ultricies neque fringilla vel. Quisque ac enim nisl. Ut quis leo et lorem iaculis porttitor a semper diam. Pellentesque lobortis nisi ac ipsum efficitur facilisis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent in tellus velit. Maecenas volutpat ipsum lacus, non fringilla neque faucibus et.</p>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell6.setFontSize(6);
 		table.draw();
 
@@ -684,7 +684,7 @@ public class TableTest {
 		// Create Header row
 		Row<PDPage> row = table.createRow(15f);
 		Cell<PDPage> cell = row.createCell(40f, "I want this < charachter is that okay? Maybe even this > also.",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("top"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("top"), 8);
 		cell = row.createCell(20f, " | ");
 		cell = row.createCell(40f, "right comparison");
 
@@ -692,13 +692,13 @@ public class TableTest {
 
 		Row<PDPage> subtractionRow = table.createRow(15f);
 		cell = subtractionRow.createCell(40f, "Removed Text From Document", HorizontalAlignment.get("center"),
-				VerticalAlignment.get("top"));
+				VerticalAlignment.get("top"), 8);
 		cell = subtractionRow.createCell(20f, " < ");
 		cell = subtractionRow.createCell(40f, "text here");
 
 		Row<PDPage> additionArow = table.createRow(15f);
 		cell = additionArow.createCell(40f, "no empty cells", HorizontalAlignment.get("center"),
-				VerticalAlignment.get("top"));
+				VerticalAlignment.get("top"), 8);
 		cell = additionArow.createCell(20f, " > ");
 		cell = additionArow.createCell(40f, "Added Text From Document");
 
@@ -802,17 +802,17 @@ public class TableTest {
 
 		Cell<PDPage> cell = row.createCell((100 / 3f),
 				"<p>SINGLE SPACING</p><p>Integer eget elit vitae est feugiat laoreet. <b>Nam vitae ex commodo, euismod risus in, sodales dolor. Mauris condimentum urna neque, non condimentum odio</b> posuere a. Aenean nisl ex, semper eu malesuada sit amet, luctus nec enim. <br>Pellentesque eu ultrices magna, non porta dolor. Fus<b><i>ce eu neque nulla. Curabitur eu eros tristique leo efficitur fringilla sit amet sed neque. Aliquam</i></b> a tempor enim. Praesent pellentesque volutpat dolor, non rhoncus est posuere id. Aenean nunc purus, gravida at mauris et, pretium volutpat nisl. Mauris lacus urna, sodales ac eros in, mollis scelerisque neque.</p> Unordered List <ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("top"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("top"), 8);
 		cell.setFontSize(6);
 
 		Cell<PDPage> cell2 = row.createCell((100 / 3f),
 				"<p>SINGLE SPACING</p><p>Proin dui dolor, lacinia at dui at, placerat ullamcorper arcu. Sed auctor sagittis elit, at eleifend ex aliquet ut. Duis lobortis est nec placerat condimentum. Aliquam erat volutpat. In a sem massa. Phasellus eget tortor iaculis, condimentum turpis a, sodales lorem. Aenean egestas congue ex<i> eu condimentum. Fusce sed</i> fringilla lorem. Vestibulum luctus ni<b>si ac turpis congue, vitae pharetra lorem suscipit.</b></p>Ordered List <ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"), 8);
 		cell2.setFontSize(6);
 
 		Cell<PDPage> cell3 = row.createCell((100 / 3f),
 				"<p>DOUBLE SPACING</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at bibendum leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lobortis enim vitae magna varius, nec scelerisque sapien elementum. Quisque porta eros in feugiat commodo. Phasellus a elit diam. Nullam pretium lorem malesuada, ullamcorper risus eget, dictum libero. Nulla neque ante, volutpat in tincidunt eu, porttitor ut purus. Fusce at mauris velit. Pellentesque vel tincidunt erat. </p><p>In vehicula velit nunc, sit amet ultricies neque fringilla vel. Quisque ac enim nisl. Ut quis leo et lorem iaculis porttitor a semper diam. Pellentesque lobortis nisi ac ipsum efficitur facilisis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent in tellus velit. Maecenas volutpat ipsum lacus, non fringilla neque faucibus et.</p>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell3.setFontSize(6);
 
 		// set double line spacing for this particular cell
@@ -825,34 +825,34 @@ public class TableTest {
 
 		Cell<PDPage> cell4 = row2.createCell((100 / 3.0f),
 				" <p>DOUBLE SPACING</p><p>Integer eget elit vitae est feugiat laoreet. <b>Nam vitae ex commodo, euismod risus in, sodales dolor. Mauris condimentum urna neque, non condimentum odio</b> posuere a. Aenean nisl ex, semper eu malesuada sit amet, luctus nec enim. <br>Pellentesque eu ultrices magna, non porta dolor. Fus<b><i>ce eu neque nulla. Curabitur eu eros tristique leo efficitur fringilla sit amet sed neque. Aliquam</i></b> a tempor enim. Praesent pellentesque volutpat dolor, non rhoncus est posuere id. Aenean nunc purus, gravida at mauris et, pretium volutpat nisl. Mauris lacus urna, sodales ac eros in, mollis scelerisque neque.</p> Unordered List <ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("top"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("top"), 8);
 		cell4.setFontSize(6);
 
 		Cell<PDPage> cell5 = row2.createCell((100 / 3f),
 				"<p>DOUBLE SPACING</p><p>Proin dui dolor, lacinia at dui at, placerat ullamcorper arcu. Sed auctor sagittis elit, at eleifend ex aliquet ut. Duis lobortis est nec placerat condimentum. Aliquam erat volutpat. In a sem massa. Phasellus eget tortor iaculis, condimentum turpis a, sodales lorem. Aenean egestas congue ex<i> eu condimentum. Fusce sed</i> fringilla lorem. Vestibulum luctus ni<b>si ac turpis congue, vitae pharetra lorem suscipit.</b></p>Ordered List <ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"), 8);
 		cell5.setFontSize(6);
 
 		Cell<PDPage> cell6 = row2.createCell((100 / 3f),
 				"<p>DOUBLE SPACING</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at bibendum leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lobortis enim vitae magna varius, nec scelerisque sapien elementum. Quisque porta eros in feugiat commodo. Phasellus a elit diam. Nullam pretium lorem malesuada, ullamcorper risus eget, dictum libero. Nulla neque ante, volutpat in tincidunt eu, porttitor ut purus. Fusce at mauris velit. Pellentesque vel tincidunt erat. </p><p>In vehicula velit nunc, sit amet ultricies neque fringilla vel. Quisque ac enim nisl. Ut quis leo et lorem iaculis porttitor a semper diam. Pellentesque lobortis nisi ac ipsum efficitur facilisis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent in tellus velit. Maecenas volutpat ipsum lacus, non fringilla neque faucibus et.</p>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell6.setFontSize(6);
 
 		// default table line spacing (1,5)
 		Row<PDPage> row3 = table.createRow(100f);
 		Cell<PDPage> cell7 = row3.createCell((100 / 3f),
 				"<p>1,5 SPACING</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at bibendum leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lobortis enim vitae magna varius, nec scelerisque sapien elementum. Quisque porta eros in feugiat commodo. Phasellus a elit diam. Nullam pretium lorem malesuada, ullamcorper risus eget, dictum libero. Nulla neque ante, volutpat in tincidunt eu, porttitor ut purus. Fusce at mauris velit. Pellentesque vel tincidunt erat. </p><p>In vehicula velit nunc, sit amet ultricies neque fringilla vel. Quisque ac enim nisl. Ut quis leo et lorem iaculis porttitor a semper diam. Pellentesque lobortis nisi ac ipsum efficitur facilisis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent in tellus velit. Maecenas volutpat ipsum lacus, non fringilla neque faucibus et.</p>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("bottom"), 8);
 		cell7.setFontSize(6);
 
 		Cell<PDPage> cell8 = row3.createCell((100 / 3.0f),
 				"<p>1,5 SPACING</p> <p>Integer eget elit vitae est feugiat laoreet. <b>Nam vitae ex commodo, euismod risus in, sodales dolor. Mauris condimentum urna neque, non condimentum odio</b> posuere a. Aenean nisl ex, semper eu malesuada sit amet, luctus nec enim. <br>Pellentesque eu ultrices magna, non porta dolor. Fus<b><i>ce eu neque nulla. Curabitur eu eros tristique leo efficitur fringilla sit amet sed neque. Aliquam</i></b> a tempor enim. Praesent pellentesque volutpat dolor, non rhoncus est posuere id. Aenean nunc purus, gravida at mauris et, pretium volutpat nisl. Mauris lacus urna, sodales ac eros in, mollis scelerisque neque.</p> Unordered List <ul><li>Item 1</li><li>Item 2</li><li>Item 3</li></ul>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("top"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("top"), 8);
 		cell8.setFontSize(6);
 
 		Cell<PDPage> cell9 = row3.createCell((100 / 3f),
 				"<p>1,5 SPACING</p><p>Proin dui dolor, lacinia at dui at, placerat ullamcorper arcu. Sed auctor sagittis elit, at eleifend ex aliquet ut. Duis lobortis est nec placerat condimentum. Aliquam erat volutpat. In a sem massa. Phasellus eget tortor iaculis, condimentum turpis a, sodales lorem. Aenean egestas congue ex<i> eu condimentum. Fusce sed</i> fringilla lorem. Vestibulum luctus ni<b>si ac turpis congue, vitae pharetra lorem suscipit.</b></p>Ordered List <ol><li>Item 1</li><li>Item 2</li><li>Item 3</li></ol>",
-				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"));
+				HorizontalAlignment.get("center"), VerticalAlignment.get("middle"), 8);
 		cell9.setFontSize(6);
 
 		table.draw();
@@ -887,8 +887,8 @@ public class TableTest {
 
         //Create Header row
         Row<PDPage> row = table.createRow(15f);
-        Cell<PDPage> cell = row.createCell((100 / 3f), "<ol><li>a</li><ol><li>b1</li><li>b2</li><ol><li>c1</li><li>c2 hello hello hello hello hello hello hello hello hello hello hello </li><li>c3</li><li>c4 hello hello hello hello hello hello hello hello hello hello</li></ol><li>b3</li></ol><li>hello</li><li>hello</li><li>hello</li><li>hello</li><li>hello</li></ol>", HorizontalAlignment.get("left"), VerticalAlignment.get("top"));
-        Cell<PDPage> cell2 = row.createCell((100 / 3f), "<ul><li>a</li><ul><li>b1</li><li>b2</li><ul><li>c1</li><li>c2 hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello </li><li>c3</li><li>c4</li></ul><li>b3</li></ul><li>hello</li><li>hello</li><li>hello</li><li>hello</li></ul>", HorizontalAlignment.get("left"), VerticalAlignment.get("top"));
+        Cell<PDPage> cell = row.createCell((100 / 3f), "<ol><li>a</li><ol><li>b1</li><li>b2</li><ol><li>c1</li><li>c2 hello hello hello hello hello hello hello hello hello hello hello </li><li>c3</li><li>c4 hello hello hello hello hello hello hello hello hello hello</li></ol><li>b3</li></ol><li>hello</li><li>hello</li><li>hello</li><li>hello</li><li>hello</li></ol>", HorizontalAlignment.get("left"), VerticalAlignment.get("top"), 8);
+        Cell<PDPage> cell2 = row.createCell((100 / 3f), "<ul><li>a</li><ul><li>b1</li><li>b2</li><ul><li>c1</li><li>c2 hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello hello </li><li>c3</li><li>c4</li></ul><li>b3</li></ul><li>hello</li><li>hello</li><li>hello</li><li>hello</li></ul>", HorizontalAlignment.get("left"), VerticalAlignment.get("top"), 8);
         table.draw();
 
         //Save the document
