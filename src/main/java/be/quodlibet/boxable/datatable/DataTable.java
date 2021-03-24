@@ -54,14 +54,15 @@ public class DataTable {
      * @throws IOException If there is an error releasing resources
      */
     public DataTable(Table table, PDPage page) throws IOException {
-        this(table, page, null, null, 8);
+        this(table, page, null, null, 8, true);
     }
 
-    public DataTable(Table table, PDPage page, PDFont bodyFont, PDFont headerFont, float fontSize) throws IOException {
+    public DataTable(Table table, PDPage page, PDFont bodyFont, PDFont headerFont, float fontSize, boolean defaultStyle) throws IOException {
         this.table = table;
         this.bodyFont = bodyFont;
         this.headerFont = headerFont;
         this.fontSize = fontSize;
+
         // Create a dummy pdf document, page and table to create template cells
         try (PDDocument ddoc = new PDDocument()) {
             PDPage dpage = new PDPage();
@@ -76,7 +77,7 @@ public class DataTable {
             firstColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE, fontSize);
             lastColumnCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE, fontSize);
             defaultCellTemplate = dr.createCell(10f, "A", HorizontalAlignment.LEFT, VerticalAlignment.MIDDLE, fontSize);
-            setDefaultStyles();
+            setDefaultStyles(defaultStyle);
         }
     }
 
@@ -86,7 +87,7 @@ public class DataTable {
      * different style than the rest of the table.
      * </p>
      */
-    private void setDefaultStyles() {
+    private void setDefaultStyles(boolean defaultStyle) {
         LineStyle thinLine = new LineStyle(Color.DARK_GRAY, 0.75f);
         LineStyle thickLine = new LineStyle(Color.DARK_GRAY, 1.2f);
         // Header style
@@ -101,6 +102,11 @@ public class DataTable {
         defaultCellTemplate.setTextColor(Color.BLACK);
         defaultCellTemplate.setFont((bodyFont == null) ? PDType1Font.HELVETICA : bodyFont);
         defaultCellTemplate.setBorderStyle(thickLine);
+
+        if (!defaultStyle) {
+            headerCellTemplate.setFillColor(Color.WHITE);
+            defaultCellTemplate.setFillColor(Color.WHITE);
+        }
 
         dataCellTemplateEven.copyCellStyle(defaultCellTemplate);
         dataCellTemplateOdd.copyCellStyle(defaultCellTemplate);
